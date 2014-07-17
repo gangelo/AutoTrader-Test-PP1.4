@@ -1,4 +1,4 @@
-# Small extension to core String class to make out code mote tidy. Woudln't
+# Small extension to core String class to make our code more tidy. Woudln't
 # normally want to make a global change like this, but it's okay for this
 # little test app.
 #
