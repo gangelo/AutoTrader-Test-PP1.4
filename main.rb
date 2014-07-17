@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-#require_relative 'transformer'
-
 =begin
 PP 1.4: In the programming language of your choice, write a program that parses
 a sentence and replaces each word with the following: first letter, number of
