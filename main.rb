@@ -68,18 +68,18 @@ module AutoTrader
       return token if token.strip.chomp.empty?
 
       # Trap and process any tokens that have embedded, non-alphabetic characters,
-      # or, be all non-alphabetic characters e.g. ####, @@@, two#words, etc.
+      # or, all non-alphabetic characters e.g. ####, @@@, two#words, etc.
       #
-      unless token.index(/[^a-zA-Z\s]+/).nil?
+      unless token.index(/[^a-z\s]+/i).nil?
         # If the token ONLY contains NON-alphabetic characters, just return it;
         # otherwise we just get caught in a loop trying to tokenize a non-alphabetic
         # token.
         #
-        return token if token.match(/([a-zA-Z]+)/).nil?
+        return token if token.match(/([a-z]+)/i).nil?
 
         # If we get here, we have a case of something like this: two#words.
         #
-        return tokenize(/([a-zA-Z]+|[^a-zA-Z]+)/, token).map! {|t| t = transform! t}.join
+        return tokenize(/([a-z]+|[^a-z]+)/i, token).map! {|t| t = transform! t}.join
       end
 
       # Save the token to the cache, so we can just return the previously transformed
