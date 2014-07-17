@@ -9,5 +9,5 @@ Ruby 2.1.2 (https://www.ruby-lang.org/en/installation/)
 
 ## Running the application
 Run...
-    $ ruby main.rb
+   $ ruby main.rb
 From the command-line, and enter a string when prompted.
