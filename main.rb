@@ -94,7 +94,14 @@ module AutoTrader
       # first and last characters of the word.
       #
       output = "#{token[0]}#{token.compress}#{token[-1]}"
+
+      # Add the word to our word cache, so if we encounter it again, we can
+      # avoid some of the expense of String#compress.
+      #
       @word_cache[token.to_sym] = output
+
+      # Return the result.
+      #
       output
     end
   end # App
