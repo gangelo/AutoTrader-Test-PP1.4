@@ -3,6 +3,8 @@ AutoTrader-Test-PP1.4
 
 Programming test for AutoTrader, Austin, TX
 
+* See comments at the top of app.rb for a description of the problem this application seeks to solve.
+
 ## Requirements
 
 Ruby 2.1.2 (https://www.ruby-lang.org/en/installation/)
