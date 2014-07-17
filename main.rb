@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require_relative 'string'
+
 =begin
 PP 1.4: In the programming language of your choice, write a program that parses
 a sentence and replaces each word with the following: first letter, number of
@@ -20,29 +22,27 @@ module AutoTrader
   class App
     VERSION = '0.0.1'
 
-    attr_reader :input
+    # Read-only properties
+    #
+    attr_reader :input, :word_cache
 
-    private
-
-    attr_accessor :word_cache
-
-    public
-
+    # Our constructor. Takes user input as the parameter.
+    #
     def initialize(input)
       @input = input || ''
       @word_cache = {}
     end
 
+    # This method runs the little app.
+    #
     def run
+      # Return an error message if no string (sentence) was entered.
+      #
       return 'No string entered.' if @input.empty?
 
       # Split the string in to tokens, delimited by start/end of line and space; this
       # ensures that we maintain the position of non-alphabetic word separators, as
-      # well as the spaces, by implication, which will be added between tokens when
-      # we ultimately join the tokens back in to the original string.
-      #
-      # /(\s* )/ # => treats spaces as separate tokens/group
-      # /(\s*[a-zA-z]+)/ # => maintains leading spaces in tokens.
+      # well as the spaces, which will all be joined to obtain our resulting string.
       #
       tokenize(/(\s* )/, @input).map! {|t| t = transform! t}.join
     end
@@ -90,13 +90,16 @@ module AutoTrader
         return @word_cache[token.to_sym]
       end
 
-      output = token[0] + token.byteslice(1...-1).downcase.chars.sort.join.squeeze.length.to_s + token[-1]
+      # Lastly, simply interpolate the compressed numeric value between the
+      # first and last characters of the word.
+      #
+      output = "#{token[0]}#{token.compress}#{token[-1]}"
       @word_cache[token.to_sym] = output
       output
     end
   end # App
 
-end #AutoTrader
+end # AutoTrader
 
 # This simply creates, and runs our simple application.
 #
@@ -108,6 +111,7 @@ result = app.run
 #
 puts "Input-: \"#{app.input}\""
 puts "Output: \"#{result}\""
+# puts "Word Cache: \"#{app.word_cache}\""
 
 # Exit
 #
